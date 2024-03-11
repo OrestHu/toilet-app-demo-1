@@ -45,14 +45,14 @@ public class JwtTokenUtils {
         return getAllClaimFromToken(token).getSubject();
     }
 
-    public List<Role> getRoles(String token){
+    public List<String> getRoles(String token){
         return getAllClaimFromToken(token).get("roles", List.class);
     }
 
     private Claims getAllClaimFromToken(String token){
         return Jwts.parser()
                 .setSigningKey(secret)
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 }

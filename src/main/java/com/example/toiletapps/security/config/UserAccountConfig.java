@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class UserAccountConfig {
 
     private final UserAccountService userAccountService;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -32,10 +35,12 @@ public class UserAccountConfig {
                         authorizeHttpRequests
                                 .requestMatchers("/api/v1/accounts/register").permitAll()
                                 .requestMatchers("/api/v1/authentication/login").permitAll()
-                                .requestMatchers("/api/v1/map").permitAll()
+                                .requestMatchers("/api/v1/markers/findAll").permitAll()
+                                .requestMatchers("/api/v1/markers/findAllEqualsFalse").hasRole("ADMIN")
                                 .requestMatchers("/error").permitAll()
                                 .anyRequest().authenticated()
-                );
+                )
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
