@@ -50,8 +50,4 @@ public class UserAccountService implements UserDetailsService {
         userAccount.setRoles(List.of(roleRepository.findByName("ROLE_USER").get()));
         userAccountRepository.save(userAccount);
     }
-
-    public Optional<UserAccount> findById(Long id){
-        return userAccountRepository.findById(id);
-    }
 }
