@@ -37,6 +37,7 @@ public class UserAccountConfig {
                                 .requestMatchers("/api/v1/authentication/login").permitAll()
                                 .requestMatchers("/api/v1/markers/findAll").permitAll()
                                 .requestMatchers("/api/v1/markers/findAllEqualsFalse").hasRole("ADMIN")
+                                .requestMatchers("/api/v1/markers/ip").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 .anyRequest().authenticated()
                 )

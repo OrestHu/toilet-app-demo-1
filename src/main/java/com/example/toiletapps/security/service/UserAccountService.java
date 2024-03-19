@@ -46,7 +46,6 @@ public class UserAccountService implements UserDetailsService {
                     String.format("This username: %s already exist. Try again!!!", userAccount.getUsername())
             );
         }
-
         userAccount.setRoles(List.of(roleRepository.findByName("ROLE_USER").get()));
         userAccountRepository.save(userAccount);
     }

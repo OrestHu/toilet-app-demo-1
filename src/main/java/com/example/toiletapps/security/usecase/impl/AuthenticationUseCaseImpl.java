@@ -3,6 +3,7 @@ package com.example.toiletapps.security.usecase.impl;
 import com.example.toiletapps.security.exception.GlobalExceptionHandler;
 import com.example.toiletapps.security.model.AccessToken;
 import com.example.toiletapps.security.model.LoginRequest;
+import com.example.toiletapps.security.repository.UserAccountRepository;
 import com.example.toiletapps.security.service.UserAccountService;
 import com.example.toiletapps.security.usecase.AuthenticationUseCase;
 import com.example.toiletapps.security.utils.JwtTokenUtils;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 public class AuthenticationUseCaseImpl implements AuthenticationUseCase {
     private final AuthenticationManager authenticationManager;
     private final UserAccountService userAccountService;
+    private final UserAccountRepository userAccountRepository;
     private final JwtTokenUtils jwtTokenUtils;
     @Override
     public AccessToken authenticate(LoginRequest request) throws GlobalExceptionHandler {
@@ -25,6 +27,11 @@ public class AuthenticationUseCaseImpl implements AuthenticationUseCase {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
         }catch (BadCredentialsException e){
             throw new GlobalExceptionHandler();
+        }
+        if(!userAccountRepository.existsByUsername(request.username())){
+            throw new RuntimeException(
+                    String.format("User account by this %s username not found", request.username())
+            );
         }
         UserDetails userDetails = userAccountService.loadUserByUsername(request.username());
         String token = jwtTokenUtils.generateJwtToken(userDetails);
