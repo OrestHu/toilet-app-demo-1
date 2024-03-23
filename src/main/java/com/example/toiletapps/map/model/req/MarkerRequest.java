@@ -1,13 +1,16 @@
 package com.example.toiletapps.map.model.req;
 
-import com.example.toiletapps.map.model.Tags;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
 public record MarkerRequest(
+        @NotBlank(message = "Name must be not blank")
+        @Size(min = 5, message = "Name must have at least {min} characters")
+        @Size(max = 25, message = "Name must have at most {max} characters")
         String name,
-        String coordinates,
+        @NotBlank(message = "Coordinates must be not blank") String coordinates,
+        @NotEmpty(message = "Tags list must not be empty")
         List<String> tags
         ) {
 }

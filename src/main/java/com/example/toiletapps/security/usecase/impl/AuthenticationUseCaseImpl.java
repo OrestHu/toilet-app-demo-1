@@ -1,9 +1,7 @@
 package com.example.toiletapps.security.usecase.impl;
 
-import com.example.toiletapps.security.exception.GlobalExceptionHandler;
 import com.example.toiletapps.security.model.AccessToken;
 import com.example.toiletapps.security.model.LoginRequest;
-import com.example.toiletapps.security.repository.UserAccountRepository;
 import com.example.toiletapps.security.service.UserAccountService;
 import com.example.toiletapps.security.usecase.AuthenticationUseCase;
 import com.example.toiletapps.security.utils.JwtTokenUtils;
@@ -14,26 +12,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
+
 @Component
 @RequiredArgsConstructor
 public class AuthenticationUseCaseImpl implements AuthenticationUseCase {
     private final AuthenticationManager authenticationManager;
     private final UserAccountService userAccountService;
-    private final UserAccountRepository userAccountRepository;
     private final JwtTokenUtils jwtTokenUtils;
     @Override
-    public AccessToken authenticate(LoginRequest request) throws GlobalExceptionHandler {
+    public AccessToken authenticate(LoginRequest request){
         try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username().toLowerCase(Locale.ROOT), request.password()));
         }catch (BadCredentialsException e){
-            throw new GlobalExceptionHandler();
+            throw new RuntimeException(String.format("Bad username or password"));
         }
-        if(!userAccountRepository.existsByUsername(request.username())){
-            throw new RuntimeException(
-                    String.format("User account by this %s username not found", request.username())
-            );
-        }
-        UserDetails userDetails = userAccountService.loadUserByUsername(request.username());
+        UserDetails userDetails = userAccountService.loadUserByUsername(request.username().toLowerCase(Locale.ROOT));
         String token = jwtTokenUtils.generateJwtToken(userDetails);
         return new AccessToken(token);
     }

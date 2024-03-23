@@ -4,9 +4,8 @@ import com.example.toiletapps.map.model.Marker;
 import com.example.toiletapps.map.model.MarkerResponse;
 import com.example.toiletapps.map.model.req.MarkerRequest;
 import com.example.toiletapps.map.usecase.MarkerUseCase;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +17,27 @@ public class MarkerController {
     private final MarkerUseCase markerUseCase;
 
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addMarker(@RequestBody MarkerRequest request) {
         markerUseCase.addMarker(request);
     }
 
     @GetMapping("/findAll")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<MarkerResponse> getAllMarkerWhereVisibilityTrue(){
         return markerUseCase.getAllMarkerWhereVisibilityTrue();
     }
 
     @GetMapping("/findAllEqualsFalse")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Marker> getAllMarkerWhereVisibilityFalse(){
         return markerUseCase.getAllMarkerWhereVisibilityFalse();
     }
 
-    @GetMapping("/findById/{marker_name}")
-    public MarkerResponse findByName(@RequestParam String name){
+    @GetMapping("/findByName/{marker_name}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public MarkerResponse findByName(@PathVariable("marker_name") String name){
         return markerUseCase.findByName(name);
     }
 
-    @GetMapping("/ip")
-    public String getClientIp(HttpServletRequest request) {
-        String ipAddress = request.getRemoteAddr();
-        return "Client IP Address: " + ipAddress;
-    }
 }
