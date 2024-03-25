@@ -9,4 +9,5 @@ public interface ReviewService {
     List<Review> findAll();
     Review findById(Integer id);
     void deleteReview(Integer id);
+    List<Review> findAllReviewByMarkerId(Integer id);
 }

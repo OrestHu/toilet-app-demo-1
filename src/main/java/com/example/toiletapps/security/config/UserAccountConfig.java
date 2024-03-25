@@ -39,7 +39,7 @@ public class UserAccountConfig {
                                 .requestMatchers("/api/v1/markers/findAllEqualsFalse").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/markers/ip").permitAll()
                                 .requestMatchers("/api/v1/review/findAllReview").permitAll()
-                                .requestMatchers("/api/v1/review/findByReviewId/{review_id}").permitAll()
+                                .requestMatchers("/api/v1/review/findByReviewId/{marker_id}").permitAll()
                                 .requestMatchers("/api/v1/markers/tags").permitAll()
                                 .requestMatchers("/api/v1/review/deleteReview/{review_id}").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/markers/deleteMarker/{marker_id}").hasRole("ADMIN")

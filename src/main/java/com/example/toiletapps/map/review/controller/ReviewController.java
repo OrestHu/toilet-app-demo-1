@@ -29,11 +29,12 @@ public class ReviewController {
         return reviewUseCase.findAll();
     }
 
-    @GetMapping("/findByReviewId/{review_id}")
+    @GetMapping("/findByReviewId/{marker_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Review findById(@PathVariable("review_id") Integer review_id){
-        return reviewUseCase.findByReviewId(review_id);
+    public List<Review> findById(@PathVariable("marker_id") Integer marker_id){
+        return reviewUseCase.findAllReviewByMarkerId(marker_id);
     }
+
 
     @DeleteMapping("/deleteReview/{review_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

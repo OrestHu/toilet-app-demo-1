@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TagsUseCaseImpl implements TagsUseCase {
-    private static TagsRepository tagsRepository;
+    private final  TagsRepository tagsRepository;
     @Override
     public List<Tags> findTags() {
         return tagsRepository.findAll();

@@ -25,13 +25,14 @@ public class ReviewUseCaseImpl implements ReviewUseCase {
     public List<Review> findAll() {
         return reviewService.findAll();
     }
-    @Override
-    public Review findByReviewId(Integer id) {
-        return reviewService.findById(id);
-    }
+
 
     @Override
     public void deleteReview(Integer id) {
         reviewService.deleteReview(id);
+    }
+    @Override
+    public List<Review> findAllReviewByMarkerId(Integer id) {
+        return reviewService.findAllReviewByMarkerId(id);
     }
 }
