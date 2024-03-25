@@ -59,4 +59,9 @@ public class MarkerUseCaseImpl implements MarkerUseCase {
                 );
         return markerToMarkerResponseMapper.map(marker);
     }
+
+    @Override
+    public void deleteMarker(Integer id) {
+        markerService.deleteMarker(id);
+    }
 }

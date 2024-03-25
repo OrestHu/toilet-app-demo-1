@@ -48,4 +48,10 @@ public class MarkerController {
     public List<Tags> findTags(){
         return tagsUseCase.findTags();
     }
+
+    @DeleteMapping("/deleteMarker/{marker_id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteMarker(@PathVariable("marker_id") Integer marker_id){
+        markerUseCase.deleteMarker(marker_id);
+    }
 }

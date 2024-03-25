@@ -21,7 +21,7 @@ public class Review {
     private Integer rating;
     @Column(nullable = false)
     private String username;
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_timestamp",nullable = false, updatable = false)
     private Instant createdTimestamp;
     @ManyToOne
     @JoinColumn(name = "marker_id", referencedColumnName = "id")

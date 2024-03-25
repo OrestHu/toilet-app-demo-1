@@ -3,12 +3,12 @@
 --changeset OrestHutovych:create-toilet-reviews-table
 --comment create table toilet.reviews
 create table toilet.reviews(
-                               id                  serial primary key,
-                               review              varchar(255) not null,
-                               rating              integer  not null,
-                               username            varchar(100) not null,
-                               createdTimestamp    timestamp not null,
-                               marker_id           integer not null
+id                  serial primary key,
+review              varchar(255) not null,
+rating              integer  not null,
+username            varchar(100) not null,
+created_timestamp    timestamp not null,
+marker_id           integer not null
 );
 --rollback drop table toilet.reviews;
 

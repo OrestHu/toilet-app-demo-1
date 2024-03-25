@@ -32,4 +32,14 @@ public class IdentityApiServiceImpl implements IdentityApiService {
                 .findUserByUsername(username)
                 .map(userAccount -> new CurrentUserApiModel(userAccount.getId()));
     }
+
+    @Override
+    public String currentUserAccountUsername(Long id) {
+        UserAccount userAccount = userAccountService.findUserById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(String.format("User Account not found by id %s", id))
+                );
+        return userAccount.getUsername();
+    }
+
 }

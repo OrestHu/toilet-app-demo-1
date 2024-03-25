@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +26,15 @@ public class MarkerServiceImpl implements MarkerService {
     @Override
     public List<Marker> getAllMarkersWithVisibilityFalse() {
         return markerRepository.getAllByVisibilityIsFalse();
+    }
+
+    @Override
+    public Optional<Marker> getMarkerById(Integer id) {
+        return markerRepository.findById(id);
+    }
+
+    @Override
+    public void deleteMarker(Integer id) {
+        markerRepository.deleteById(id);
     }
 }

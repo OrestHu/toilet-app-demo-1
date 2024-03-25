@@ -11,4 +11,5 @@ public interface MarkerRepository extends JpaRepository<Marker, Integer> {
     List<Marker> getAllByVisibilityIsTrue();
     List<Marker> getAllByVisibilityIsFalse();
     Optional<Marker> findByName(String name);
+
 }

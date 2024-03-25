@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface IdentityApiService {
     Optional<CurrentUserApiModel> currentUserAccount();
+    String currentUserAccountUsername(Long id);
 }
