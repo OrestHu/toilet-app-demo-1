@@ -28,6 +28,7 @@ public class ReviewUseCaseImpl implements ReviewUseCase {
     }
 
 
+// New
     @Override
     public void deleteReview(Integer id) {
         reviewService.deleteReview(id);
