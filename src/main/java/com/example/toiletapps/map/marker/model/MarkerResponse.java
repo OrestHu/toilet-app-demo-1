@@ -6,5 +6,6 @@ public record MarkerResponse(Integer id,
                              String name,
                              String coordinates,
                              boolean visibility,
+                             Double averageRating,
                              Collection<Tags> tags) {
 }
