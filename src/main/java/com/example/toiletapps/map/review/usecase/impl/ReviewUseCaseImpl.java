@@ -3,6 +3,7 @@ package com.example.toiletapps.map.review.usecase.impl;
 import com.example.toiletapps.map.review.mapper.ReviewRequestToReviewMapper;
 import com.example.toiletapps.map.review.model.Review;
 import com.example.toiletapps.map.review.model.req.ReviewRequest;
+import com.example.toiletapps.map.review.model.resp.ReviewResponse;
 import com.example.toiletapps.map.review.service.ReviewService;
 import com.example.toiletapps.map.review.usecase.ReviewUseCase;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,8 @@ public class ReviewUseCaseImpl implements ReviewUseCase {
         reviewService.deleteReview(id);
     }
     @Override
-    public List<Review> findAllReviewByMarkerId(Integer id) {
+    public ReviewResponse findAllReviewByMarkerId(Integer id) {
         return reviewService.findAllReviewByMarkerId(id);
     }
+
 }

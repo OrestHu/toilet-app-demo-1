@@ -3,6 +3,7 @@ package com.example.toiletapps.map.review.service.impl;
 import com.example.toiletapps.map.marker.api.service.MarkerApiService;
 import com.example.toiletapps.map.marker.model.Marker;
 import com.example.toiletapps.map.review.model.Review;
+import com.example.toiletapps.map.review.model.resp.ReviewResponse;
 import com.example.toiletapps.map.review.repository.ReviewRepository;
 import com.example.toiletapps.map.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> findAllReviewByMarkerId(Integer id) {
+    public ReviewResponse findAllReviewByMarkerId(Integer id) {
         Marker marker = markerApiService.findMarkerByApi(id);
-        return reviewRepository.findAllByMarker(marker);
+        List<Review> allReview = reviewRepository.findAllByMarker(marker);
+        double res = allReview.stream()
+                .mapToInt(Review::getRating)
+                .average()
+                .orElseThrow(() -> new RuntimeException("Something went wrong"));
+        ReviewResponse response = new ReviewResponse(allReview, res);
+        return response;
     }
 }

@@ -17,8 +17,4 @@ marker_id           integer not null
 alter table toilet.reviews
     add constraint reviews__marker_id__fk
         foreign key (marker_id) references toilet.markers(id);
-alter table toilet.reviews
-    add constraint reviews_unique
-        unique (marker_id);
 --rollback alter table toilet.reviews drop constraints reviews__marker_id__fk;
---rollback alter table toilet.reviews drop constraints reviews_unique;

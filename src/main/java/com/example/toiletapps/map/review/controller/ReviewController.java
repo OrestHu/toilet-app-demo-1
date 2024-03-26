@@ -3,6 +3,7 @@ package com.example.toiletapps.map.review.controller;
 
 import com.example.toiletapps.map.review.model.Review;
 import com.example.toiletapps.map.review.model.req.ReviewRequest;
+import com.example.toiletapps.map.review.model.resp.ReviewResponse;
 import com.example.toiletapps.map.review.usecase.ReviewUseCase;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,9 @@ public class ReviewController {
 
     @GetMapping("/findByReviewId/{marker_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Review> findById(@PathVariable("marker_id") Integer marker_id){
+    public ReviewResponse findById(@PathVariable("marker_id") Integer marker_id){
         return reviewUseCase.findAllReviewByMarkerId(marker_id);
     }
-
-
     @DeleteMapping("/deleteReview/{review_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteReview(@PathVariable("review_id") Integer review_id){

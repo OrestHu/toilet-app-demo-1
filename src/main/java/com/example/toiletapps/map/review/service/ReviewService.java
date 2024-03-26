@@ -1,6 +1,7 @@
 package com.example.toiletapps.map.review.service;
 
 import com.example.toiletapps.map.review.model.Review;
+import com.example.toiletapps.map.review.model.resp.ReviewResponse;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface ReviewService {
     List<Review> findAll();
     Review findById(Integer id);
     void deleteReview(Integer id);
-    List<Review> findAllReviewByMarkerId(Integer id);
+    ReviewResponse findAllReviewByMarkerId(Integer id);
 }
