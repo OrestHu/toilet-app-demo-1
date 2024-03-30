@@ -9,6 +9,7 @@ import com.example.toiletapps.map.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,11 +42,17 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewResponse findAllReviewByMarkerId(Integer id) {
         Marker marker = markerApiService.findMarkerByApi(id);
         List<Review> allReview = reviewRepository.findAllByMarker(marker);
-        double res = allReview.stream()
-                .mapToInt(Review::getRating)
-                .average()
-                .orElseThrow(() -> new RuntimeException("Something went wrong"));
-        ReviewResponse response = new ReviewResponse(allReview, res);
-        return response;
+
+        double averageRating;
+        if (allReview.isEmpty()) {
+            averageRating = 1.0;
+        } else {
+            averageRating = allReview.stream()
+                    .mapToInt(Review::getRating)
+                    .average()
+                    .orElseThrow(() -> new RuntimeException("No reviews found"));
+        }
+
+        return new ReviewResponse(allReview, averageRating);
     }
 }

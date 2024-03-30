@@ -4,6 +4,10 @@ import com.example.toiletapps.map.marker.model.Marker;
 import com.example.toiletapps.map.marker.repository.MarkerRepository;
 import com.example.toiletapps.map.marker.service.MarkerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

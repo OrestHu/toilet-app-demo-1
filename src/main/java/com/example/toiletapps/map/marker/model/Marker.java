@@ -1,9 +1,11 @@
 package com.example.toiletapps.map.marker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Collection;
 
@@ -11,7 +13,7 @@ import java.util.Collection;
 @Setter
 @Entity
 @Table(schema = "toilet", name = "markers")
-public class Marker {
+public class Marker implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,7 +25,7 @@ public class Marker {
     private Instant createdTimestamp;
     @Column(name = "visibility", nullable = false)
     private boolean visibility;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             schema = "toilet",
             name = "marker_tags",
