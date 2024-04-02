@@ -22,6 +22,14 @@ public class JwtTokenUtils {
     @Value("${jwt.lifetime}")
     private Duration lifetime;
 
+    public boolean checkValidToken(String token){
+        Claims allClaims = getAllClaimFromToken(token);
+        Date expirationDate = allClaims.getExpiration();
+        Date currentDate = new Date();
+
+        return currentDate.before(expirationDate);
+    }
+
     public String generateJwtToken(UserDetails userDetails){
         Map<String, Object> claims = new HashMap<>();
         List<String> roleList = userDetails

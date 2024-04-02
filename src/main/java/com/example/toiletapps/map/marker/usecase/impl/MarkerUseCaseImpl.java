@@ -10,6 +10,7 @@ import com.example.toiletapps.map.marker.model.MarkerResponse;
 import com.example.toiletapps.map.marker.model.req.MarkerRequest;
 import com.example.toiletapps.map.marker.repository.MarkerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,9 @@ public class MarkerUseCaseImpl implements MarkerUseCase {
     @Override
     public List<MarkerResponse> getAllMarkerWhereVisibilityTrue() {
         List<Marker> markers = markerService.getAllMarkersWithVisibilityTrue();
+        for(Marker marker : markers){
+            System.out.println(marker);
+        }
         return markers
                 .stream()
                 .map(markerToMarkerResponseMapper::map)

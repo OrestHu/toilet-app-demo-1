@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -41,6 +40,7 @@ public class UserAccountConfig {
                                 .requestMatchers("/api/v1/review/findAllReview").permitAll()
                                 .requestMatchers("/api/v1/review/findByReviewId/{marker_id}").permitAll()
                                 .requestMatchers("/api/v1/markers/tags").permitAll()
+                                .requestMatchers("/api/v1/validate/valid/{token}").permitAll()
                                 .requestMatchers("/api/v1/review/deleteReview/{review_id}").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/markers/deleteMarker/{marker_id}").hasRole("ADMIN")
                                 .requestMatchers("/error").permitAll()

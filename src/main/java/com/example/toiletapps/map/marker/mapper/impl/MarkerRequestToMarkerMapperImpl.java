@@ -8,7 +8,7 @@ import com.example.toiletapps.map.marker.repository.TagsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class MarkerRequestToMarkerMapperImpl implements MarkerRequestToMarkerMap
         Marker marker = new Marker();
 
         marker.setName(source.name());
+        marker.setCreatedTimestampString(LocalDateTime.now());
         marker.setCoordinates(source.coordinates());
-        marker.setCreatedTimestamp(Instant.now());
 
         List<Tags> tagObjects = new ArrayList<>();
         for (String tagName : source.tags()) {

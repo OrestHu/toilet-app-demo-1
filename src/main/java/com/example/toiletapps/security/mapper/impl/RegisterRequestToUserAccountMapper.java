@@ -17,14 +17,17 @@ public class RegisterRequestToUserAccountMapper implements com.example.toiletapp
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
+    private static final String ROLE_NOT_FOUND_ERROR = "User role not found";
+
     @Override
     public UserAccount map(RegisterRequest source) {
+
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(source.username().toLowerCase(Locale.ROOT));
         userAccount.setPassword(passwordEncoder.encode(source.password()));
         Role role = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RuntimeException(
-                        String.format("User role not found")
+                        String.format(ROLE_NOT_FOUND_ERROR)
                 ));
         userAccount.setRoles(List.of(role));
         return userAccount;
