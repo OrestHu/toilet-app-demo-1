@@ -29,6 +29,10 @@ public class MarkerRequestToMarkerMapperImpl implements MarkerRequestToMarkerMap
             Tags tag = tagsRepository.findByName(tagName);
             tagObjects.add(tag);
         }
+        if(source.tags().contains("PAID") && source.tags().contains("FREE")){
+            throw new RuntimeException("Tags list cannot contain both PAID and FREE at the same time");
+        }
+
 
         marker.setTags(tagObjects);
         return marker;

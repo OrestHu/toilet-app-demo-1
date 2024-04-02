@@ -11,6 +11,8 @@ public record MarkerRequest(
         String name,
         @NotBlank(message = "Coordinates must be not blank") String coordinates,
         @NotEmpty(message = "Tags list must not be empty")
+        @Size(min = 1, message = "Tags list must not contain more than {min} elements")
+        @Size(max = 5, message = "Tags list must not contain less than {max} elements")
         List<String> tags
         ) {
 }
