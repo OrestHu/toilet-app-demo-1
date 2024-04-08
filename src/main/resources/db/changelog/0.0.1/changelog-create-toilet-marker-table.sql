@@ -63,3 +63,4 @@ alter table toilet.markers
     add column visibility bool;
 
 --rollback alter table toilet.markers drop column visibility;
+

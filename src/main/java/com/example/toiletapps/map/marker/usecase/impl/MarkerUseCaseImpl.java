@@ -65,6 +65,16 @@ public class MarkerUseCaseImpl implements MarkerUseCase {
     }
 
     @Override
+    public void changeVisibility(Integer id) {
+        Marker marker = markerRepository.findById(id).orElseThrow(
+                () -> new RuntimeException(
+                        String.format("Marker by this %s id not found", id)
+                )
+        );
+        markerService.changeVisibility(marker);
+    }
+
+    @Override
     public void deleteMarker(Integer id) {
         markerService.deleteMarker(id);
     }

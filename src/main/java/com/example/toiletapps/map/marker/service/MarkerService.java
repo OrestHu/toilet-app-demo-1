@@ -11,4 +11,5 @@ public interface MarkerService {
     List<Marker> getAllMarkersWithVisibilityFalse();
     Optional<Marker> getMarkerById(Integer id);
     void deleteMarker(Integer id);
+    void changeVisibility(Marker marker);
 }

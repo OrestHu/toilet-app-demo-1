@@ -43,4 +43,10 @@ public class MarkerServiceImpl implements MarkerService {
     public void deleteMarker(Integer id) {
         markerRepository.deleteById(id);
     }
+
+    @Override
+    public void changeVisibility(Marker marker) {
+        marker.setVisibility(true);
+        markerRepository.save(marker);
+    }
 }

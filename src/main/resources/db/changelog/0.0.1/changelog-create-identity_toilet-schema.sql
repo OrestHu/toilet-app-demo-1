@@ -53,4 +53,3 @@ insert into identity_toilet.Roles(name)
 values ('ROLE_USER'),
        ('ROLE_ADMIN');
 --rollback truncate table identity_toilet.roles;
-

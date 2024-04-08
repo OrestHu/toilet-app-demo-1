@@ -43,6 +43,12 @@ public class MarkerController {
         return markerUseCase.findByName(name);
     }
 
+    @PutMapping("/changeVisibility/{marker_id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void change(@PathVariable("marker_id") Integer marker_id){
+        markerUseCase.changeVisibility(marker_id);
+    }
+
     @GetMapping("/tags")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Tags> findTags(){

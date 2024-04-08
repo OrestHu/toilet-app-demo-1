@@ -13,5 +13,6 @@ public interface MarkerUseCase {
     List<MarkerResponse> getAllMarkerWhereVisibilityTrue();
     List<Marker> getAllMarkerWhereVisibilityFalse();
     MarkerResponse findByName(String name);
+    void changeVisibility(Integer id);
     void deleteMarker(Integer id);
 }
