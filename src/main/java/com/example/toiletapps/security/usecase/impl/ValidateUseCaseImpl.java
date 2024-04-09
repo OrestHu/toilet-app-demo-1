@@ -17,7 +17,8 @@ public class ValidateUseCaseImpl implements ValidateUseCase {
     }
 
     @Override
-    public boolean checkAdmin(Long id) {
-        return userAccountService.checkAdmin(id);
+    public boolean checkAdmin(String token) {
+        String username = jwtTokenUtils.getUsername(token);
+        return userAccountService.checkAdmin(username);
     }
 }

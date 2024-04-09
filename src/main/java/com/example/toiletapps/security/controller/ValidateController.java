@@ -16,9 +16,9 @@ public class ValidateController {
         return validateUseCase.check(token);
     }
 
-    @GetMapping("/checkAdmin/{user_id}")
+    @GetMapping("/checkAdmin/{token}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public boolean checkAdmin(@PathVariable("user_id") Long user_id){
+    public boolean checkAdmin(@PathVariable("token") String user_id){
         return validateUseCase.checkAdmin(user_id);
     }
 }

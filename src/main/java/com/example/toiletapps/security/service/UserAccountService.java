@@ -57,10 +57,10 @@ public class UserAccountService implements UserDetailsService {
     public Optional<UserAccount> findUserById(Long id){
         return userAccountRepository.findById(id);
     }
-    public boolean checkAdmin(Long id){
-        UserAccount userAccount = userAccountRepository.findById(id).orElseThrow(
+    public boolean checkAdmin(String username){
+        UserAccount userAccount = userAccountRepository.findByUsername(username).orElseThrow(
                 () -> new RuntimeException(
-                        String.format("User Account not found by this %s id", id)
+                        String.format("User Account not found by this %s username", username)
                 )
         );
         return userAccount.getRoles().stream()
