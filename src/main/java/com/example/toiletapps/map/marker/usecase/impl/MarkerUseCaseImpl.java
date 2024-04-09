@@ -38,9 +38,6 @@ public class MarkerUseCaseImpl implements MarkerUseCase {
     @Override
     public List<MarkerResponse> getAllMarkerWhereVisibilityTrue() {
         List<Marker> markers = markerService.getAllMarkersWithVisibilityTrue();
-        for(Marker marker : markers){
-            System.out.println(marker);
-        }
         return markers
                 .stream()
                 .map(markerToMarkerResponseMapper::map)

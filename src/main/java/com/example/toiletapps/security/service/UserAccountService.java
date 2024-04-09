@@ -57,4 +57,13 @@ public class UserAccountService implements UserDetailsService {
     public Optional<UserAccount> findUserById(Long id){
         return userAccountRepository.findById(id);
     }
+    public boolean checkAdmin(Long id){
+        UserAccount userAccount = userAccountRepository.findById(id).orElseThrow(
+                () -> new RuntimeException(
+                        String.format("User Account not found by this %s id", id)
+                )
+        );
+        return userAccount.getRoles().stream()
+                .anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
+    }
 }

@@ -41,6 +41,7 @@ public class UserAccountConfig {
                                 .requestMatchers("/api/v1/review/findByReviewId/{marker_id}").permitAll()
                                 .requestMatchers("/api/v1/markers/tags").permitAll()
                                 .requestMatchers("/api/v1/validate/valid/{token}").permitAll()
+                                .requestMatchers("/api/v1/validate/checkAdmin/{user_id}").permitAll()
                                 .requestMatchers("/api/v1/review/deleteReview/{review_id}").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/markers/deleteMarker/{marker_id}").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/changeVisibility/{marker_id}").hasRole("ADMIN")
