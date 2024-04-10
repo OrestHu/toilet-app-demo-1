@@ -1,7 +1,7 @@
 package com.example.toiletapps.security.usecase.impl;
 
 import com.example.toiletapps.security.model.AccessToken;
-import com.example.toiletapps.security.model.LoginRequest;
+import com.example.toiletapps.security.model.req.LoginRequest;
 import com.example.toiletapps.security.service.UserAccountService;
 import com.example.toiletapps.security.usecase.AuthenticationUseCase;
 import com.example.toiletapps.security.utils.JwtTokenUtils;

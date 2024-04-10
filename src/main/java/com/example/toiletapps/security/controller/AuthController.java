@@ -1,7 +1,7 @@
 package com.example.toiletapps.security.controller;
 
 import com.example.toiletapps.security.model.AccessToken;
-import com.example.toiletapps.security.model.LoginRequest;
+import com.example.toiletapps.security.model.req.LoginRequest;
 import com.example.toiletapps.security.usecase.AuthenticationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
